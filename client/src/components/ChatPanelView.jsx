@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 const ChatPanelView = ({ chats, identity }) => {
   const createChat = ({ name, content }, index) => {
     const chatStyle = {};
-    if(name === identity) {
+    if (name === identity) {
       chatStyle.alignSelf = "flex-end";
       chatStyle.alignItems = "flex-end";
     }
@@ -27,6 +27,8 @@ const ChatPanelView = ({ chats, identity }) => {
           ml: { xs: 0, md: "275px" },
           mt: 1,
           maxWidth: "xl",
+          mb: 12.5,
+          overflow: scroll
         }}
       >
         {chats.map(createChat)}

@@ -1,15 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const duumyInitalValue = [
-  "alpha",
-  "bravo",
-  "charlie",
-  "omega",
-  "theeta",
-  "charlie",
-];
-
-const initialState = duumyInitalValue;
+const initialState = [];
 
 const allRoomsSlice = createSlice({
   name: "allRooms",
@@ -17,11 +8,18 @@ const allRoomsSlice = createSlice({
   reducers: {
     setAllRooms: (state, action) => action.payload,
 
-    addRoomToAllRooms: (state, action) =>
-      state.includes(action.payload) ? state : [action.payload, ...state],
+    addRoomToAllRooms: (state, action) => {
+      if (!state.includes(action.payload)) {
+        state.unshift(action.payload);
+      }
+    },
 
-    removeRoomFromAllRooms: (state, { payload: roomId }) =>
-      state.filter((room) => room.id !== roomId),
+    removeRoomFromAllRooms: (state, action) => {
+      const index = state.indexOf(action.payload);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+    },
   },
 });
 

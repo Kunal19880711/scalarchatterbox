@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const dummyInitalValue = {
-  focusedRoom: "alpha",
+const initialState = {
+  focusedRoom: null,
   isJoining: false,
 };
-
-const initialState = dummyInitalValue;
 
 const focusedRoomSlice = createSlice({
   name: "focusedRoom",

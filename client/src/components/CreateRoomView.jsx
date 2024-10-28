@@ -21,6 +21,7 @@ const CreateRoomView = ({ onCreateRoom }) => {
         flexGrow: 0,
         paddingBottom: 1,
         mr: 2,
+        ml: 2,
       }}
     >
       <TextField

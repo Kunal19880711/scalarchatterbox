@@ -3,6 +3,7 @@ import allRoomsReducer from "./allRoomsSlice";
 import joinedRoomReducer from "./joinedRoomsSlice";
 import focusedRoomReducer from "./focusedRoomSlice";
 import identityReducer from "./identitySlice";
+import socketMiddleware from "./socketMiddleware";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,8 @@ const store = configureStore({
     focusedRoom: focusedRoomReducer,
     identity: identityReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(socketMiddleware),
 });
 
 export default store;

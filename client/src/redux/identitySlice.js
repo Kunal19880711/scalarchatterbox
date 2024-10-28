@@ -1,16 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const dummyInitialValue =  "John Doe";
-
-const initialState = dummyInitialValue;
+const initialState = null;
 
 const identitySlice = createSlice({
   name: "identity",
   initialState,
   reducers: {
-    setIdentity: (state, action) => {
-      state = action.payload;
-    },
+    setIdentity: (state, action) => action.payload,
   },
 });
 

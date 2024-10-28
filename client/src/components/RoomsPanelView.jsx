@@ -7,19 +7,36 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import CreateRoom from "./CreateRoom";
 
-const RoomsPanelView = ({ joinedRooms, remainingRooms }) => {
-
+const RoomsPanelView = ({
+  joinedRooms,
+  remainingRooms,
+  focusedRoom,
+  joinRoom,
+  deleteRoom,
+  changeRoom,
+}) => {
   const createJoinedRoomElement = (roomName) => (
     <Box
       key={roomName}
       component="li"
-      sx={{ display: "flex", alignItems: "center", p: 0.5, mr: 2 }}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        p: 0.5,
+        pr: 2.5,
+        pl: 2,
+        backgroundColor: () => (roomName === focusedRoom ? "lightgray" : null),
+      }}
+      onClick={() => changeRoom(roomName)}
     >
       <Typography variant="h6">{roomName}</Typography>
       <IconButton
         aria-label="delete room"
         sx={{ ml: "auto" }}
-        onClick={() => console.log(`delete room ${roomName}`)}
+        onClick={(e) => {
+          deleteRoom(roomName);
+          e.stopPropagation();
+        }}
       >
         <DeleteIcon />
       </IconButton>
@@ -29,11 +46,11 @@ const RoomsPanelView = ({ joinedRooms, remainingRooms }) => {
     <Box
       key={roomName}
       component="li"
-      sx={{ display: "flex", alignItems: "center", p: 0.5, mr: 2 }}
-      onClick={() => console.log(`join room ${roomName}`)}
+      sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 2.5, pl: 2 }}
+      onClick={() => joinRoom(roomName)}
     >
       <Typography variant="h6">{roomName}</Typography>
-      <IconButton aria-label="delete room" sx={{ ml: "auto" }}>
+      <IconButton aria-label="join room" sx={{ ml: "auto" }} color="primary">
         <MeetingRoomIcon />
       </IconButton>
     </Box>
@@ -41,14 +58,13 @@ const RoomsPanelView = ({ joinedRooms, remainingRooms }) => {
   return (
     <Box
       sx={{
-        ml: 2,
         mt: 2,
         width: "calc(100% - 2px)",
         display: "flex",
         flexDirection: "column",
       }}
     >
-     <CreateRoom />
+      <CreateRoom />
       <Divider />
       <Box
         component="ul"
