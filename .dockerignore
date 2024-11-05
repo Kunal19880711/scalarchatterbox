@@ -1,0 +1,10 @@
+node_modules
+.config
+.builder
+.dockerignore
+.env
+.git
+.gitignore
+Dockerfile
+README.md
+scalarchatterbox.code-workspace

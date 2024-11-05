@@ -130,4 +130,6 @@ dist
 .pnp.*
 
 # my own
-.top_secret.txt
+.env
+.config
+.builder

@@ -8,6 +8,7 @@ import http from "http";
 
 import setupIO from "./setupIO.js";
 
+const port = 8000;
 const __dirname = import.meta.dirname;
 const app = express();
 const server = http.createServer(app);
@@ -35,6 +36,6 @@ app.use(
   express.static(path.join(__dirname, "..", "..", "client", "dist"))
 );
 
-server.listen(process.env.PORT, () => {
-  console.log(`Socket.IO server running on port ${process.env.PORT}`);
+server.listen(port, () => {
+  console.log(`Socket.IO server running on port ${port}`);
 });
