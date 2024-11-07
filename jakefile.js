@@ -42,7 +42,7 @@ desc(
 task("run-docker", ["cleanup"], async function () {
   try {
     await asyncRun(
-      `docker run -d --name ${containerName} -p 80:8000 ${dockerImgName}`
+      `docker run -d --name ${containerName} -p 8000:8000 ${dockerImgName}`
     );
   } catch (error) {
     console.error(`Error building docker image: ${error}`);
