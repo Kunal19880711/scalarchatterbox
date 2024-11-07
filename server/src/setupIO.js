@@ -36,6 +36,7 @@ export default function setupIO(server) {
       socketMap.get(socket.id).roomSet.add(room);
       io.emit("roomAdded", room);
 
+      socket.join(room);
       const members = getMemberNamesOfRoom(room);
       socket.emit("roomJoined", { room, members });
     });
