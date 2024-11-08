@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginView from "./LoginView";
 import { AppConsts, OutgoingMsg } from "../common/contants";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { identity } = useSelector((state) => state.userData);
 
   const setUsername = (identity) => {
     dispatch({
@@ -13,7 +14,13 @@ const Login = () => {
     });
   };
 
-  return <LoginView setIdentity={setUsername} appName={AppConsts.AppName} />;
+  return (
+    <LoginView
+      identity={identity}
+      setIdentity={setUsername}
+      appName={AppConsts.AppName}
+    />
+  );
 };
 
 export default Login;

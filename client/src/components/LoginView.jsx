@@ -5,67 +5,87 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
+import { Drawer } from "@mui/material";
 
-const LoginView = ({ setIdentity, appName }) => {
+const LoginView = ({ identity, setIdentity, appName }) => {
   const [username, setUsername] = useState("");
 
   return (
-    <Container
-      maxWidth="xl"
-      sx={{
-        height: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        transition: "transform 0.5s ease-in-out",
-        transform: "translateY(0)",
-      }}
-    >
-      <Typography variant="h1" component="h1" color="primary" gutterBottom>
-        Welcome to {appName}.
-      </Typography>
-      <Box
-        component="form"
+    <Drawer anchor="top" open={!identity} transitionDuration={{ exit: 500 }}>
+      <Container
+        className="login"
+        maxWidth="xl"
         sx={{
+          width: "100%",
           display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
+          flexDirection: "column",
           justifyContent: "center",
-        }}
-        onSubmit={(e) => {
-          e.preventDefault();
-          const formData = new FormData(e.currentTarget);
-          setIdentity(formData.get("username"));
+          alignItems: "center",
+          textAlign: "center",
         }}
       >
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="username"
-          label="Enter your name to start"
-          name="username"
-          autoComplete="username"
-          autoFocus
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          sx={{
-            backgroundColor: "white",
-          }}
-        />
-        <IconButton
-          type="submit"
+        <Typography
+          variant="header"
+          component="h1"
           color="primary"
-          aria-label="send"
-          sx={{ m: 1 }}
+          gutterBottom
+          sx={{ display: { xs: "flex", sm: "none" } }}
         >
-          <SendIcon />
-        </IconButton>
-      </Box>
-    </Container>
+          Welcome to {appName}.
+        </Typography>
+        <Typography
+          variant="h1"
+          component="h1"
+          color="primary"
+          gutterBottom
+          sx={{ display: { xs: "none", sm: "flex" } }}
+        >
+          Welcome to {appName}.
+        </Typography>
+
+        <Box
+          component="form"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            setIdentity(formData.get("username"));
+          }}
+        >
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Enter your name to start"
+            name="username"
+            autoComplete="username"
+            autoFocus
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            sx={{
+              backgroundColor: "white",
+              p: 1,
+            }}
+          />
+          <IconButton
+            type="submit"
+            color="primary"
+            aria-label="send"
+            sx={{ m: 1 }}
+          >
+            <SendIcon />
+          </IconButton>
+        </Box>
+      </Container>
+    </Drawer>
   );
 };
 

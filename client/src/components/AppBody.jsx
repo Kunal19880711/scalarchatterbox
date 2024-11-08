@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import ChatPanel from "./ChatPanel";
 import NavBar from "./NavBar";
 import SendMessage from "./SendMessage";
@@ -8,27 +8,20 @@ import { IncomingMsg, SocketEvents } from "../common/contants";
 
 function AppBody() {
   const dispatch = useDispatch();
-  const {identity} = useSelector((state) => state.userData);
-  const view = !!identity ? (
+
+  useEffect(() => {
+    Object.values(IncomingMsg).forEach((type) => dispatch({ type }));
+    Object.values(SocketEvents).forEach((type) => dispatch({ type }));
+  }, [dispatch]);
+
+  return (
     <>
+      <Login />
       <NavBar />
       <ChatPanel />
       <SendMessage />
     </>
-  ) : (
-    <Login />
   );
-
-  useEffect(() => {
-    Object.values(IncomingMsg).forEach((type) =>
-      dispatch({ type })
-    );
-    Object.values(SocketEvents).forEach((type) =>
-      dispatch({ type })
-    );
-  }, [dispatch]);
-
-  return view;
 }
 
 export default AppBody;
