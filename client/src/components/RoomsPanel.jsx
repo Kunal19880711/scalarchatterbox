@@ -34,6 +34,10 @@ const RoomPanel = () => {
     );
   };
 
+  const leaveRoom = (roomName) => {
+    dispatch({ type: OutgoingMsg.LeaveRoom, payload: roomName });
+  };
+
   return (
     <RoomPanelView
       joinedRooms={joinedRooms}
@@ -42,6 +46,7 @@ const RoomPanel = () => {
       joinRoom={joinRoom}
       deleteRoom={deleteRoom}
       changeRoom={changeRoom}
+      leaveRoom={leaveRoom}
     />
   );
 };

@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import LogoutIcon from "@mui/icons-material/Logout";
 import CreateRoom from "./CreateRoom";
 
 const RoomsPanelView = ({
@@ -14,6 +15,7 @@ const RoomsPanelView = ({
   joinRoom,
   deleteRoom,
   changeRoom,
+  leaveRoom,
 }) => {
   const createJoinedRoomElement = (roomName) => (
     <Box
@@ -31,8 +33,17 @@ const RoomsPanelView = ({
     >
       <Typography variant="h6">{roomName}</Typography>
       <IconButton
-        aria-label="delete room"
+        aria-label="leave room"
         sx={{ ml: "auto" }}
+        onClick={(e) => {
+          leaveRoom(roomName);
+          e.stopPropagation();
+        }}
+      >
+        <LogoutIcon />
+      </IconButton>
+      <IconButton
+        aria-label="delete room"
         onClick={(e) => {
           deleteRoom(roomName);
           e.stopPropagation();
