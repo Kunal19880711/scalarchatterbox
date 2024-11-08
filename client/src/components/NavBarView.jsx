@@ -21,7 +21,7 @@ const NavBarView = ({ appName, roomName, username }) => {
   return (
     <>
       <AppBar
-        position="sticky"
+        position="fixed"
         component="nav"
         sx={{
           zIndex: 1400,

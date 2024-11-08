@@ -1,9 +1,12 @@
 import "./ChatPanelView.css";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import { yellow } from "@mui/material/colors";
+import { Toolbar } from "@mui/material";
 
 const ChatPanelView = ({ chats, identity }) => {
+  const msgEndRef = useRef();
+
   const createChat = ({ name, content }, index) => {
     const chatBubbleClass = `chat-bubble ${
       name === identity && "self-chat-bubble"
@@ -20,8 +23,13 @@ const ChatPanelView = ({ chats, identity }) => {
     );
   };
 
+  useEffect(() => {
+    msgEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [chats]);
+
   return (
     <>
+      <Toolbar />
       <Box
         sx={{
           display: "flex",
@@ -35,6 +43,7 @@ const ChatPanelView = ({ chats, identity }) => {
         }}
       >
         {chats.map(createChat)}
+        <div ref={msgEndRef} />
       </Box>
     </>
   );
