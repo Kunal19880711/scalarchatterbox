@@ -1,3 +1,37 @@
 body {
   margin: 0;
 }
+
+.stylish-background {
+  background: linear-gradient(
+      45deg,
+      rgba(63, 80, 181, 0.12) 10%,
+      transparent 11%,
+      transparent 89%,
+      rgba(63, 80, 181, 0.12) 90%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(63, 80, 181, 0.12) 10%,
+      transparent 11%,
+      transparent 89%,
+      rgba(63, 80, 181, 0.12) 90%
+    ),
+    radial-gradient(circle, transparent 25%, #ffffff 26%),
+    linear-gradient(
+      0deg,
+      transparent 44%,
+      rgba(63, 80, 181, 0.12) 45%,
+      rgba(63, 80, 181, 0.12) 55%,
+      transparent 56%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 44%,
+      rgba(63, 80, 181, 0.12) 45%,
+      rgba(63, 80, 181, 0.12) 55%,
+      transparent 56%
+    );
+  background-size: 3em 3em;
+  background-color: #ffffff;
+}
