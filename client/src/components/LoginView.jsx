@@ -22,7 +22,6 @@ const LoginView = ({ setIdentity, appName }) => {
         transition: "transform 0.5s ease-in-out",
         transform: "translateY(0)",
       }}
-      className="stylish-background"
     >
       <Typography variant="h1" component="h1" color="primary" gutterBottom>
         Welcome to {appName}.
