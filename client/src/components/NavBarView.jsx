@@ -9,7 +9,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import LeftPanelView from "./LeftPanelView";
 import RightPanelView from "./RightPanelView";
 
-const NavBarView = ({ appName, roomName }) => {
+const NavBarView = ({ appName, roomName, username }) => {
   const [showLeftPanel, setLeftPanel] = React.useState(false);
   const [viewMembers, setViewMembers] = React.useState(false);
 
@@ -37,52 +37,95 @@ const NavBarView = ({ appName, roomName }) => {
           >
             <MenuIcon />
           </IconButton>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="whisperhub logo"
+            sx={{
+              display: { xs: "none", md: "flex" },
+              p: 0.5,
+            }}
+          >
+            <img
+              src="/WhisperHub.svg"
+              alt="WhisperHub"
+              style={{ width: "2em", height: "2em" }}
+            />
+          </IconButton>
           <Typography
-            variant="h6"
+            variant="subtitle1"
             noWrap
             component="header"
             sx={{
-              mr: 2,
+              ml: 1,
               display: { xs: "none", md: "flex" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
-              paddingLeft: "1em",
             }}
           >
             {appName}
           </Typography>
-          {roomName && (
-            <Box sx={{ flexGrow: 0, display: { xs: "flex" } }}>
-              <Typography
-                variant="body1"
-                noWrap
-                component="div"
-                sx={{
-                  mt: 1,
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                {roomName}
-              </Typography>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={openViewMembers}
-                sx={{ ml: 1, display: { xs: "flex" } }}
-              >
-                <GroupsIcon />
-              </IconButton>
-            </Box>
-          )}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex" },
+              flexDirection: "row",
+              justifyContent: { xs: "start", md: "center" },
+            }}
+          >
+            <Typography
+              variant="h5"
+              noWrap
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              {username}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              flexGrow: 1,
+              flexBasis: 1,
+              display: { xs: "flex" },
+              flexDirection: "row",
+              justifyContent: "end",
+            }}
+          >
+            {roomName && (
+              <>
+                <Typography
+                  variant="body1"
+                  noWrap
+                  component="div"
+                  sx={{
+                    mt: 1,
+                    fontWeight: 700,
+                    color: "inherit",
+                    textDecoration: "none",
+                  }}
+                >
+                  {roomName}
+                </Typography>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={openViewMembers}
+                  sx={{ ml: 1, display: { xs: "flex" } }}
+                >
+                  <GroupsIcon />
+                </IconButton>
+              </>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
       <LeftPanelView open={showLeftPanel} onClose={closeLeftPanel} />
