@@ -8,7 +8,6 @@ const SendMessage = () => {
   const { focusedRoom } = useSelector((store) => store.userData);
 
   const sendMessage = (message) => {
-    console.log(`message send on [${focusedRoom}]:${message}`);
     dispatch({
       type: OutgoingMsg.SendMessage,
       payload: { room: focusedRoom, message },

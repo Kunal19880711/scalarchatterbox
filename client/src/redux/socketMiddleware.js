@@ -64,7 +64,6 @@ const socketMiddleware = (store) => (next) => (action) => {
   // Members
   if (action.type === IncomingMsg.UserJoined) {
     socket.on(IncomingMsg.UserJoined, ({ room, name }) => {
-      console.log("someone joined", { room, name });
       store.dispatch(
         addMemberToJoinedRoom({
           room,
@@ -87,7 +86,6 @@ const socketMiddleware = (store) => (next) => (action) => {
   // Chats
   if (action.type === IncomingMsg.NewMessage) {
     socket.on(IncomingMsg.NewMessage, ({ room, name, message, time }) => {
-      console.log("new message", room, name, message, time, Date.now());
       store.dispatch(
         addMessageToJoinedRoom({
           room,

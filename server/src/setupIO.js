@@ -15,8 +15,6 @@ export default function setupIO(server) {
   const io = new Io(server);
 
   io.on("connection", (socket) => {
-    console.log("A user connected:", socket.id);
-
     // 1. initialize socket's data in socketMap
     socketMap.set(socket.id, {
       name: null,
@@ -89,7 +87,6 @@ export default function setupIO(server) {
       // 6. notify all other sockets in the room that another user joined
       const { name } = socketMap.get(socket.id);
       io.to(room).emit("userJoined", { room, name });
-      console.log("send used joined", { room, name });
     });
 
     socket.on("leaveRoom", (room) => {
@@ -132,8 +129,6 @@ export default function setupIO(server) {
 
       // Step 3: Remove the user from socketMap
       socketMap.delete(socket.id);
-
-      console.log("User disconnected:", socket.id);
     });
   });
 }

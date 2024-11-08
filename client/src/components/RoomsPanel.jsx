@@ -21,12 +21,10 @@ const RoomPanel = () => {
   };
 
   const deleteRoom = (roomName) => {
-    console.log("delete room", roomName);
     dispatch({ type: OutgoingMsg.DeleteRoom, payload: roomName });
   };
 
   const changeRoom = (roomName) => {
-    console.log("change room", roomName);
     dispatch(
       setFocusedRoom({
         focusedRoom: roomName,

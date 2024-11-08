@@ -7,7 +7,6 @@ const CreateRoom = () => {
   const dispatch = useDispatch();
 
   const onCreateRoom = (roomName) => {
-    console.log(roomName);
     dispatch({
       type: OutgoingMsg.CreateRoom,
       payload: roomName
