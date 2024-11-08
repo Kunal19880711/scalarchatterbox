@@ -38,10 +38,10 @@
       {
         "type": "node",
         "request": "launch",
-        "name": "Run npm run dev in server directory",
+        "name": "Run npm start in server directory",
         "skipFiles": ["<node_internals>/**"],
         "runtimeExecutable": "npm",
-        "runtimeArgs": ["run", "dev"],
+        "runtimeArgs": ["start"],
         "cwd": "${workspaceFolder}/server"
       }
     ]
