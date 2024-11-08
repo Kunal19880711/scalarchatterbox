@@ -8,16 +8,12 @@ const ChatPanelView = ({ chats, identity }) => {
     const chatBubbleClass = `chat-bubble ${
       name === identity && "self-chat-bubble"
     }`;
-    const additionalBubbleStyle = {};
+    const extraBubbleStyle = {};
     if (name === identity) {
-      additionalBubbleStyle.backgroundColor = yellow[500];
+      extraBubbleStyle.backgroundColor = yellow[500];
     }
     return (
-      <div
-        key={index}
-        className={chatBubbleClass}
-        style={additionalBubbleStyle}
-      >
+      <div key={index} className={chatBubbleClass} style={extraBubbleStyle}>
         <div className="chat-bubble-title">{name}</div>
         <div className="chat-bubble-content">{content}</div>
       </div>
