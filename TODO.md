@@ -14,3 +14,9 @@
 10. set name page
     - text
     - background
+
+
+# Learnings
+1. AI generate icons: [https://www.recraft.ai/]
+2. Modify Svg: [https://boxy-svg.com]
+3. CSS Backgrounds [https://superdesigner.co/tools/css-backgrounds]
