@@ -85,6 +85,7 @@ const NavBarView = ({ appName, roomName, username }) => {
                 letterSpacing: ".1rem",
                 color: "inherit",
                 textDecoration: "none",
+                pr: 18,
               }}
             >
               {username}
