@@ -4,6 +4,7 @@
     - https://www.recraft.ai/
     - https://boxy-svg.com/
 3. leave chat icon + functionality
+3. delete room bug fix
 4. chat bubble
 5. chat settings singleline / multiine
 6. send chat when no room
