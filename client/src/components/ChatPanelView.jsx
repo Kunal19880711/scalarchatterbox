@@ -1,18 +1,25 @@
 import "./ChatPanelView.css";
 import React from "react";
 import Box from "@mui/material/Box";
+import { yellow } from "@mui/material/colors";
 
 const ChatPanelView = ({ chats, identity }) => {
   const createChat = ({ name, content }, index) => {
-    const chatStyle = {};
+    const chatBubbleClass = `chat-bubble ${
+      name === identity && "self-chat-bubble"
+    }`;
+    const additionalBubbleStyle = {};
     if (name === identity) {
-      chatStyle.alignSelf = "flex-end";
-      chatStyle.alignItems = "flex-end";
+      additionalBubbleStyle.backgroundColor = yellow[500];
     }
     return (
-      <div key={index} className="chat-bubble" style={chatStyle}>
+      <div
+        key={index}
+        className={chatBubbleClass}
+        style={additionalBubbleStyle}
+      >
         <div className="chat-bubble-title">{name}</div>
-        <div>{content}</div>
+        <div className="chat-bubble-content">{content}</div>
       </div>
     );
   };
@@ -28,7 +35,7 @@ const ChatPanelView = ({ chats, identity }) => {
           mt: 1,
           maxWidth: "xl",
           mb: 12.5,
-          overflow: scroll
+          overflow: scroll,
         }}
       >
         {chats.map(createChat)}
