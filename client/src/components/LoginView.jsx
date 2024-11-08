@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
 
-const LoginView = ({ setIdentity }) => {
+const LoginView = ({ setIdentity, appName }) => {
   const [username, setUsername] = useState("");
 
   return (
@@ -22,12 +22,10 @@ const LoginView = ({ setIdentity }) => {
         transition: "transform 0.5s ease-in-out",
         transform: "translateY(0)",
       }}
-      //   onExit={() => ({
-      //     transform: "translateY(-100vh)",
-      //   })}
+      className="stylish-background"
     >
       <Typography variant="h1" component="h1" color="primary" gutterBottom>
-        Welcome to ChatterBox.
+        Welcome to {appName}.
       </Typography>
       <Box
         component="form"
@@ -55,6 +53,9 @@ const LoginView = ({ setIdentity }) => {
           autoFocus
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          sx={{
+            backgroundColor: "white",
+          }}
         />
         <IconButton
           type="submit"
