@@ -8,7 +8,7 @@ import { IncomingMsg } from "../common/contants";
 
 function AppBody() {
   const dispatch = useDispatch();
-  const identity = useSelector((state) => state.identity);
+  const {identity} = useSelector((state) => state.userData);
   const view = !!identity ? (
     <>
       <NavBar />

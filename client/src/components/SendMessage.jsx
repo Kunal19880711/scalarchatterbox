@@ -5,7 +5,7 @@ import { OutgoingMsg } from "../common/contants";
 
 const SendMessage = () => {
   const dispatch = useDispatch();
-  const { focusedRoom, isJoining } = useSelector((store) => store.focusedRoom);
+  const { focusedRoom } = useSelector((store) => store.userData);
 
   const sendMessage = (message) => {
     console.log(`message send on [${focusedRoom}]:${message}`);

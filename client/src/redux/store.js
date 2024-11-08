@@ -1,16 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import allRoomsReducer from "./allRoomsSlice";
-import joinedRoomReducer from "./joinedRoomsSlice";
-import focusedRoomReducer from "./focusedRoomSlice";
-import identityReducer from "./identitySlice";
+import userDataReducer from "./userDataSlice";
 import socketMiddleware from "./socketMiddleware";
 
 const store = configureStore({
   reducer: {
     allRooms: allRoomsReducer,
-    joinedRooms: joinedRoomReducer,
-    focusedRoom: focusedRoomReducer,
-    identity: identityReducer,
+    userData: userDataReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(socketMiddleware),

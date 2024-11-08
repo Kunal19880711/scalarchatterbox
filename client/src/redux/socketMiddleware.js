@@ -1,20 +1,20 @@
 import socket from "../ws/socketService";
 
-import { setIdentity } from "./identitySlice";
 import {
   setAllRooms,
   addRoomToAllRooms,
   removeRoomFromAllRooms,
 } from "./allRoomsSlice";
 import {
+  setIdentity,
   setJoinedRooms,
   addRoomToJoinedRooms,
   removeRoomFromJoinedRooms,
   addMemberToJoinedRoom,
   removeMemberFromJoinedRoom,
   addMessageToJoinedRoom,
-} from "./joinedRoomsSlice";
-import { setFocusedRoom } from "./focusedRoomSlice";
+  setFocusedRoom,
+} from "./userDataSlice";
 import { IncomingMsg, OutgoingMsg } from "../common/contants";
 
 const socketMiddleware = (store) => (next) => (action) => {

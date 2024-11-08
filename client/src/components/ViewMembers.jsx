@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import ViewMembersView from "./ViewMembersView";
 
 const ViewMembers = () => {
-  const joinedRooms = useSelector((store) => store.joinedRooms);
-  const { focusedRoom, isJoining } = useSelector((store) => store.focusedRoom);
+  const { focusedRoom, joinedRooms } = useSelector((store) => store.userData);
   const members =
     (joinedRooms.find((roomInfo) => roomInfo.name === focusedRoom) || {})
       .members || [];

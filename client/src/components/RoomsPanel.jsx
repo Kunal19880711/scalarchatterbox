@@ -2,14 +2,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RoomPanelView from "./RoomsPanelView";
 import { OutgoingMsg } from "../common/contants";
-import { setFocusedRoom } from "../redux/focusedRoomSlice";
+import { setFocusedRoom } from "../redux/userDataSlice";
 
 const RoomPanel = () => {
   const dispatch = useDispatch();
 
   const allRooms = useSelector((store) => store.allRooms);
-  const joinedRoomsList = useSelector((store) => store.joinedRooms);
-  const { focusedRoom, isJoining } = useSelector((store) => store.focusedRoom);
+  const { focusedRoom, joinedRooms: joinedRoomsList } = useSelector(
+    (store) => store.userData
+  );
 
   const joinedRooms = joinedRoomsList.map(({ name }) => name);
   const joinedRoomsSet = new Set(joinedRooms);
