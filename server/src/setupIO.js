@@ -25,7 +25,6 @@ export default function setupIO(server) {
       roomSet: new Set(),
     });
 
-    
     socket.on("setIdentity", (name) => {
       // 1. set socket's name in socketMap
       socketMap.get(socket.id).name = name;
@@ -60,13 +59,13 @@ export default function setupIO(server) {
       const members = roomMap.get(room);
 
       // 2. remove the room from each socket's roomSet
-      for (let memberSocket of members) {
-        socketMap.get(memberSocket).roomSet.delete(room);
+      for (let memberSocketId of members) {
+        socketMap.get(memberSocketId).roomSet.delete(room);
       }
 
       // 3. every member should leave the room
-      for (let memberSocket of members) {
-        memberSocket.leave(room);
+      for (let memberSocketId of members) {
+        io.sockets.sockets.get(memberSocketId)?.leave(room);
       }
 
       // 4. notify all sockets that the room was deleted
