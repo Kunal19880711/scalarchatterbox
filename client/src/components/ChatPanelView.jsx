@@ -39,6 +39,7 @@ const ChatPanelView = ({ chats, identity }) => {
           mt: 1,
           maxWidth: "xl",
           mb: 12.5,
+          pb: 12.5,
           overflow: scroll,
         }}
       >

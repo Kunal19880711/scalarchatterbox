@@ -82,9 +82,23 @@ const userDataSlice = createSlice({
         (info) => info.name === action.payload.room
       );
       if (roomInfo) {
+        // 1. check if it is a duplicate chat, if yes neglecting it
+        const { name, content, time } = action.payload;
+        const lastElem = roomInfo.chats.at(-1);
+        if (
+          lastElem &&
+          lastElem.name === name &&
+          lastElem.content === content &&
+          lastElem.time === time
+        ) {
+          return;
+        }
+
+        // 2. adding chat if it is a fresh chat
         roomInfo.chats.push({
-          name: action.payload.name,
-          content: action.payload.content,
+          name,
+          content,
+          time,
         });
       }
     },

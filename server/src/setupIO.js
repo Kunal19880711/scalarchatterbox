@@ -115,7 +115,8 @@ export default function setupIO(server) {
       const { name } = socketMap.get(socket.id);
 
       // Step 2: Emit a newMessage event to all sockets in the room
-      io.to(room).emit("newMessage", { room, name, message });
+      const time = Date.now();
+      io.to(room).emit("newMessage", { room, name, message, time });
     });
 
     socket.on("disconnect", () => {
