@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,8 +10,8 @@ import LeftPanelView from "./LeftPanelView";
 import RightPanelView from "./RightPanelView";
 
 const NavBarView = ({ appName, roomName, username }) => {
-  const [showLeftPanel, setLeftPanel] = React.useState(false);
-  const [viewMembers, setViewMembers] = React.useState(false);
+  const [showLeftPanel, setLeftPanel] = useState(false);
+  const [viewMembers, setViewMembers] = useState(false);
 
   const openLeftPanel = () => setLeftPanel(true);
   const closeLeftPanel = () => setLeftPanel(false);
