@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import LoginView from "./LoginView";
-import { OutgoingMsg } from "../common/contants";
+import { AppConsts, OutgoingMsg } from "../common/contants";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Login = () => {
     });
   };
 
-  return <LoginView setIdentity={setUsername} />;
+  return <LoginView setIdentity={setUsername} appName={AppConsts.AppName} />;
 };
 
 export default Login;

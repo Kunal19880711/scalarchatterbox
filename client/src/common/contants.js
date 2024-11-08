@@ -16,3 +16,6 @@ OutgoingMsg.DeleteRoom = "deleteRoom";
 OutgoingMsg.JoinRoom = "joinRoom";
 OutgoingMsg.LeaveRoom = "leaveRoom";
 OutgoingMsg.SendMessage = "sendMessage";
+
+export const AppConsts = {};
+AppConsts.AppName = "WhisperHub";
