@@ -1,13 +1,14 @@
 import socket from "../ws/socketService";
 
 import {
+  resetAllRooms,
   setAllRooms,
   addRoomToAllRooms,
   removeRoomFromAllRooms,
 } from "./allRoomsSlice";
 import {
+  resetUserData,
   setIdentity,
-  setJoinedRooms,
   addRoomToJoinedRooms,
   removeRoomFromJoinedRooms,
   addMemberToJoinedRoom,
@@ -15,20 +16,15 @@ import {
   addMessageToJoinedRoom,
   setFocusedRoom,
 } from "./userDataSlice";
-import { IncomingMsg, OutgoingMsg } from "../common/contants";
+import { IncomingMsg, OutgoingMsg, SocketEvents } from "../common/contants";
 
 const socketMiddleware = (store) => (next) => (action) => {
-  // reset
-  if (action.type === IncomingMsg.Reset) {
-    store.dispatch(setIdentity(null));
-    store.dispatch(setAllRooms([]));
-    store.dispatch(setJoinedRooms([]));
-    store.dispatch(
-      setFocusedRoom({
-        focusedRoom: null,
-        isJoining: false,
-      })
-    );
+  // Socket
+  if (action.type === SocketEvents.Disconnect) {
+    socket.on(SocketEvents.Disconnect, () => {
+      store.dispatch(resetAllRooms());
+      store.dispatch(resetUserData());
+    });
   }
 
   // identity
@@ -97,7 +93,7 @@ const socketMiddleware = (store) => (next) => (action) => {
           room,
           name,
           content: message,
-          time
+          time,
         })
       );
     });

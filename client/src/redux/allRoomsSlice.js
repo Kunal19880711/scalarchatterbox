@@ -6,7 +6,13 @@ const allRoomsSlice = createSlice({
   name: "allRooms",
   initialState,
   reducers: {
-    setAllRooms: (state, action) => action.payload,
+    resetAllRooms: (state) => {
+      state = [];
+    },
+
+    setAllRooms: (state, action) => {
+      state = action.payload;
+    },
 
     addRoomToAllRooms: (state, action) => {
       if (!state.includes(action.payload)) {
@@ -23,6 +29,10 @@ const allRoomsSlice = createSlice({
   },
 });
 
-export const { setAllRooms, addRoomToAllRooms, removeRoomFromAllRooms } =
-  allRoomsSlice.actions;
+export const {
+  resetAllRooms,
+  setAllRooms,
+  addRoomToAllRooms,
+  removeRoomFromAllRooms,
+} = allRoomsSlice.actions;
 export default allRoomsSlice.reducer;

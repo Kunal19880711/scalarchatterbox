@@ -1,5 +1,7 @@
+export const SocketEvents = {};
+SocketEvents.Disconnect = "disconnect";
+
 export const IncomingMsg = {};
-IncomingMsg.Reset = "reset";
 IncomingMsg.ConfirmIdentity = "confirmIdentity";
 IncomingMsg.RoomAdded = "roomAdded";
 IncomingMsg.RoomDeleted = "roomDeleted";

@@ -11,6 +11,13 @@ const userDataSlice = createSlice({
   name: "joinedRooms",
   initialState,
   reducers: {
+    resetUserData: (state) => {
+      state.joinedRooms = [];
+      state.identity = null;
+      state.focusedRoom = null;
+      state.isJoining = false;
+    },
+
     setJoinedRooms: (state, action) => {
       state.joinedRooms = action.payload;
     },
@@ -119,6 +126,7 @@ const userDataSlice = createSlice({
 });
 
 export const {
+  resetUserData,
   setJoinedRooms,
   addRoomToJoinedRooms,
   removeRoomFromJoinedRooms,

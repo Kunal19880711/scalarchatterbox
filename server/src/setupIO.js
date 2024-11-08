@@ -16,10 +16,10 @@ export default function setupIO(server) {
 
   io.on("connection", (socket) => {
     console.log("A user connected:", socket.id);
-    // 1. send reset event to socket
-    socket.emit("reset");
+    // // 1. send reset event to socket
+    // socket.emit("reset");
 
-    // 2. initialize socket's data in socketMap
+    // 1. initialize socket's data in socketMap
     socketMap.set(socket.id, {
       name: null,
       roomSet: new Set(),
