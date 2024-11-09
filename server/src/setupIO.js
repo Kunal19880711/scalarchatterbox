@@ -4,7 +4,7 @@ import {
   OutgoingMsg,
   OutgoingFormResponseMsg,
   IncomingMsg,
-} from "./constants";
+} from "./constants.js";
 
 const socketMap = new Map();
 const roomMap = new Map();
