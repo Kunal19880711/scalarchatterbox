@@ -17,6 +17,10 @@ function getMemberNamesOfRoom(room) {
   return members;
 }
 
+function addSocketEventListener({ io, socket, event, listener }) {
+  socket.on(event, (payload) => listener({ io, socket, event, payload }));
+}
+
 export default function setupIO(server) {
   const io = new Io(server);
 
@@ -27,7 +31,13 @@ export default function setupIO(server) {
       roomSet: new Set(),
     });
 
-    socket.on(IncomingMsg.SetIdentity, (name) => {
+    addSocketEventListener({
+      io,
+      socket,
+      event: IncomingMsg.SetIdentity,
+      listener: onSetIdentity,
+    });
+    function onSetIdentity({ io, socket, payload: name }) {
       // 1. check if name already been taken
       for (let [_, socketInfo] of socketMap.entries()) {
         if (name === socketInfo.name) {
@@ -48,9 +58,15 @@ export default function setupIO(server) {
         name,
         rooms: [...roomMap.keys()],
       });
-    });
+    }
 
-    socket.on(IncomingMsg.CreateRoom, (room) => {
+    addSocketEventListener({
+      io,
+      socket,
+      event: IncomingMsg.CreateRoom,
+      listener: onCreateRoom,
+    });
+    function onCreateRoom({ io, socket, payload: room }) {
       // 1. check if room already exists
       if (roomMap.has(room)) {
         socket.emit(OutgoingFormResponseMsg.RoomCreation, {
@@ -76,9 +92,15 @@ export default function setupIO(server) {
       // 6. notify the socket that joined the room
       const members = getMemberNamesOfRoom(room);
       socket.emit(OutgoingMsg.RoomJoined, { room, members });
-    });
+    }
 
-    socket.on(IncomingMsg.DeleteRoom, (room) => {
+    addSocketEventListener({
+      io,
+      socket,
+      event: IncomingMsg.DeleteRoom,
+      listener: onDeleteRoom,
+    });
+    function onDeleteRoom({ io, socket, payload: room }) {
       // 1. get the set of sockets in the room
       const members = roomMap.get(room);
 
@@ -94,9 +116,16 @@ export default function setupIO(server) {
 
       // 4. notify all sockets that the room was deleted
       io.emit(OutgoingMsg.RoomDeleted, room);
+    }
+
+    addSocketEventListener({
+      io,
+      socket,
+      event: IncomingMsg.JoinRoom,
+      listener: onJoinRoom,
     });
 
-    socket.on(IncomingMsg.JoinRoom, (room) => {
+    function onJoinRoom({ io, socket, payload: room }) {
       // 1. add room to socket's roomSet
       socketMap.get(socket.id).roomSet.add(room);
 
@@ -115,9 +144,15 @@ export default function setupIO(server) {
       // 6. notify all other sockets in the room that another user joined
       const { name } = socketMap.get(socket.id);
       io.to(room).emit(OutgoingMsg.UserJoined, { room, name });
-    });
+    }
 
-    socket.on(IncomingMsg.LeaveRoom, (room) => {
+    addSocketEventListener({
+      io,
+      socket,
+      event: IncomingMsg.LeaveRoom,
+      listener: onLeaveRoom,
+    });
+    function onLeaveRoom({ io, socket, payload: room }) {
       const { name } = socketMap.get(socket.id);
 
       // Step 1: Remove the room from the user's roomSet
@@ -131,18 +166,30 @@ export default function setupIO(server) {
 
       // Step 4: Make the user leave the room
       socket.leave(room);
-    });
+    }
 
-    socket.on(IncomingMsg.SendMessage, ({ room, message }) => {
+    addSocketEventListener({
+      io,
+      socket,
+      event: IncomingMsg.SendMessage,
+      listener: onSendMessage,
+    });
+    function onSendMessage({ io, socket, payload: { room, message } }) {
       // Step 1: Get the user's name from the socketMap
       const { name } = socketMap.get(socket.id);
 
       // Step 2: Emit a newMessage event to all sockets in the room
       const time = Date.now();
       io.to(room).emit(OutgoingMsg.NewMessage, { room, name, message, time });
-    });
+    }
 
-    socket.on(SocketEvents.Disconnect, () => {
+    addSocketEventListener({
+      io,
+      socket,
+      event: SocketEvents.Disconnect,
+      listener: onDisconnect,
+    });
+    function onDisconnect({ io, socket }) {
       const { name, roomSet } = socketMap.get(socket.id);
 
       // Step 1: Remove the user from all rooms in roomSet
@@ -157,6 +204,6 @@ export default function setupIO(server) {
 
       // Step 3: Remove the user from socketMap
       socketMap.delete(socket.id);
-    });
+    }
   });
 }
