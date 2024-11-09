@@ -7,18 +7,23 @@ import { Toolbar } from "@mui/material";
 const ChatPanelView = ({ chats, identity }) => {
   const msgEndRef = useRef();
 
-  const createChat = ({ name, content }, index) => {
+  const createChat = ({ name, content, time }, index) => {
+    const chatTime = new Date(time).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     const chatBubbleClass = `chat-bubble ${
       name === identity && "self-chat-bubble"
     }`;
     const extraBubbleStyle = {};
     if (name === identity) {
-      extraBubbleStyle.backgroundColor = yellow[500];
+      extraBubbleStyle.backgroundColor = yellow[300];
     }
     return (
       <div key={index} className={chatBubbleClass} style={extraBubbleStyle}>
         <div className="chat-bubble-title">{name}</div>
         <div className="chat-bubble-content">{content}</div>
+        <div className="chat-bubble-time">{chatTime}</div>
       </div>
     );
   };

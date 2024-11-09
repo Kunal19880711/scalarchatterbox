@@ -23,3 +23,8 @@
   white-space: pre-wrap;
   line-height: 1.3;
 }
+.chat-bubble-time {
+  align-self: flex-end;
+  font-size: small;
+  font-weight: 100;
+}
