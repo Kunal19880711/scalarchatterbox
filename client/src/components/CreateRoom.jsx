@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import CreateRoomView from "./CreateRoomView";
-import { OutgoingMsg, IncomingFormResultMsg } from "../common/contants";
+import { OutgoingMsg, IncomingFormResponseMsg } from "../common/contants";
 import socket from "../ws/socketService";
 
 const CreateRoom = () => {
-  const [roomCreationErr, setRoomCreationErr] = useState(null);
+  const [isRoomCreationSuccess, setIsRoomCreationSuccess] = useState(true);
   const dispatch = useDispatch();
 
   const onCreateRoom = (roomName) => {
@@ -15,20 +15,20 @@ const CreateRoom = () => {
     });
   };
 
-  const errorListener = useCallback(({ error }) => {
-    setRoomCreationErr(error);
-  }, []);
+  const formResponseListener = ({ success }) => {
+    setIsRoomCreationSuccess(success);
+  };
 
   useEffect(() => {
-    socket.on(IncomingFormResultMsg.RoomCreationResult, errorListener);
+    socket.on(IncomingFormResponseMsg.RoomCreation, formResponseListener);
     return () =>
-      socket.off(IncomingFormResultMsg.RoomCreationResult, errorListener);
+      socket.off(IncomingFormResponseMsg.RoomCreation, formResponseListener);
   }, [socket]);
 
   return (
     <CreateRoomView
       onCreateRoom={onCreateRoom}
-      roomCreationErr={roomCreationErr}
+      isRoomCreationSuccess={isRoomCreationSuccess}
     />
   );
 };

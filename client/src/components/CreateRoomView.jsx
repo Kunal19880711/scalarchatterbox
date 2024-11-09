@@ -5,22 +5,22 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 
-const CreateRoomView = ({ onCreateRoom, roomCreationErr }) => {
+const CreateRoomView = ({ onCreateRoom, isRoomCreationSuccess }) => {
   const [newRoomName, setNewRoomName] = useState("");
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [isShowError, setIsShowError] = useState(false);
+
   const onRoomNameChange = (e) => {
     setNewRoomName(e.target.value);
-    setShowErrorMessage(false);
   };
 
   useEffect(() => {
-    if (!roomCreationErr) {
+    if (isRoomCreationSuccess) {
       setNewRoomName("");
-      setShowErrorMessage(false);
+      setIsShowError(false);
     } else {
-      setShowErrorMessage(true);
+      setIsShowError(true);
     }
-  }, [roomCreationErr]);
+  }, [isRoomCreationSuccess]);
 
   return (
     <Box
@@ -60,7 +60,7 @@ const CreateRoomView = ({ onCreateRoom, roomCreationErr }) => {
           <AddIcon />
         </IconButton>
       </Box>
-      {showErrorMessage && (
+      {isShowError && (
         <Typography
           component="p"
           variant="subtitle2"

@@ -22,10 +22,22 @@ export default function setupIO(server) {
     });
 
     socket.on("setIdentity", (name) => {
-      // 1. set socket's name in socketMap
+      // 1. check if name already been taken
+      for (let [_, socketInfo] of socketMap.entries()) {
+        if (name === socketInfo.name) {
+          socket.emit("userCreationResponse", {
+            success: false,
+            error: `Name: [${name}] already been taken.`,
+          });
+          return;
+        }
+      }
+      socket.emit("userCreationResponse", { success: true });
+
+      // 2. set socket's name in socketMap
       socketMap.get(socket.id).name = name;
 
-      // 2. notify socket with confirmIdentity event
+      // 3. notify socket with confirmIdentity event
       socket.emit("confirmIdentity", {
         name,
         rooms: [...roomMap.keys()],
@@ -33,15 +45,15 @@ export default function setupIO(server) {
     });
 
     socket.on("createRoom", (room) => {
-      // 1. check of room already exists
+      // 1. check if room already exists
       if (roomMap.has(room)) {
-        socket.emit("roomCreationResult", {
+        socket.emit("roomCreationResponse", {
           success: false,
-          error: `Room: [${room}] already exists`,
+          error: `Room: [${room}] already exists.`,
         });
         return;
       }
-      socket.emit("roomCreationResult", { success: true });
+      socket.emit("roomCreationResponse", { success: true });
 
       // 2. add room to roomMap
       roomMap.set(room, new Set([socket.id]));
