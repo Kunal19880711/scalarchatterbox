@@ -33,19 +33,29 @@ export default function setupIO(server) {
     });
 
     socket.on("createRoom", (room) => {
-      // 1. add room to roomMap
+      // 1. check of room already exists
+      if (roomMap.has(room)) {
+        socket.emit("roomCreationResult", {
+          success: false,
+          error: `Room: [${room}] already exists`,
+        });
+        return;
+      }
+      socket.emit("roomCreationResult", { success: true });
+
+      // 2. add room to roomMap
       roomMap.set(room, new Set([socket.id]));
 
-      // 2. add room to socket's roomSet
+      // 3. add room to socket's roomSet
       socketMap.get(socket.id).roomSet.add(room);
 
-      // 3. notify all sockets (including the one that created the room)
+      // 4. notify all sockets (including the one that created the room)
       io.emit("roomAdded", room);
 
-      // 4. join the socket to the room
+      // 5. join the socket to the room
       socket.join(room);
 
-      // 5. notify the socket that joined the room
+      // 6. notify the socket that joined the room
       const members = getMemberNamesOfRoom(room);
       socket.emit("roomJoined", { room, members });
     });

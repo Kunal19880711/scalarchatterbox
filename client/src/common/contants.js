@@ -10,6 +10,10 @@ IncomingMsg.UserJoined = "userJoined";
 IncomingMsg.UserLeft = "userLeft";
 IncomingMsg.NewMessage = "newMessage";
 
+export const IncomingFormResultMsg = {};
+IncomingFormResultMsg.UserCreationResult = "userCreationResult";
+IncomingFormResultMsg.RoomCreationResult = "roomCreationResult";
+
 export const OutgoingMsg = {};
 
 OutgoingMsg.SetIdentity = "setIdentity";
