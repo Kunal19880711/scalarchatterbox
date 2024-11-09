@@ -4,12 +4,19 @@ import NavBarView from "./NavBarView";
 import { AppConsts } from "../common/contants";
 
 const NavBar = () => {
-  const { focusedRoom, identity } = useSelector((store) => store.userData);
+  const { focusedRoom, identity, joinedRooms } = useSelector(
+    (store) => store.userData
+  );
+  const members =
+    (joinedRooms.find((roomInfo) => roomInfo.name === focusedRoom) || {})
+      .members || [];
+  const memberCnt = members.length;
   return (
     <NavBarView
       appName={AppConsts.AppName}
       roomName={focusedRoom}
       username={identity}
+      memberCnt={memberCnt}
     />
   );
 };

@@ -8,8 +8,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LeftPanelView from "./LeftPanelView";
 import RightPanelView from "./RightPanelView";
+import Badge from "@mui/material/Badge";
 
-const NavBarView = ({ appName, roomName, username }) => {
+const NavBarView = ({ appName, roomName, username, memberCnt }) => {
   const [showLeftPanel, setLeftPanel] = useState(false);
   const [viewMembers, setViewMembers] = useState(false);
 
@@ -122,7 +123,9 @@ const NavBarView = ({ appName, roomName, username }) => {
                   onClick={openViewMembers}
                   sx={{ ml: 1, display: { xs: "flex" } }}
                 >
-                  <GroupsIcon />
+                  <Badge badgeContent={memberCnt} color="success">
+                    <GroupsIcon />
+                  </Badge>
                 </IconButton>
               </>
             )}
