@@ -16,6 +16,11 @@ const LoginView = ({
   const [username, setUsername] = useState("");
   const [isShowError, setIsShowError] = useState(false);
 
+  const onUsernameChange = (e) => {
+    setUsername(e.target.value);
+    setIsShowError(false);
+  };
+
   useEffect(() => {
     if (isUserCreationSuccess) {
       setUsername("");
@@ -84,7 +89,7 @@ const LoginView = ({
             autoComplete="username"
             autoFocus
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={onUsernameChange}
             sx={{
               backgroundColor: "white",
               p: 1,

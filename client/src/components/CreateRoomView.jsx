@@ -11,6 +11,7 @@ const CreateRoomView = ({ onCreateRoom, isRoomCreationSuccess }) => {
 
   const onRoomNameChange = (e) => {
     setNewRoomName(e.target.value);
+    setIsShowError(false);
   };
 
   useEffect(() => {
