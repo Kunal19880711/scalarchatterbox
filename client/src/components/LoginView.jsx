@@ -6,13 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
+import { FormState } from "../common/constants";
 
-const LoginView = ({
-  identity,
-  setIdentity,
-  appName,
-  isUserCreationSuccess,
-}) => {
+const LoginView = ({ identity, setIdentity, appName, formState }) => {
   const [username, setUsername] = useState("");
   const [isShowError, setIsShowError] = useState(false);
 
@@ -22,13 +18,19 @@ const LoginView = ({
   };
 
   useEffect(() => {
-    if (isUserCreationSuccess) {
-      setUsername("");
-      setIsShowError(false);
-    } else {
-      setIsShowError(true);
+    switch (formState) {
+      case FormState.Pending:
+        setIsShowError(false);
+        break;
+      case FormState.Success:
+        setUsername("");
+        setIsShowError(false);
+        break;
+      case FormState.Failed:
+        setIsShowError(true);
+        break;
     }
-  }, [isUserCreationSuccess]);
+  }, [formState]);
 
   return (
     <Drawer anchor="top" open={!identity} transitionDuration={{ exit: 500 }}>

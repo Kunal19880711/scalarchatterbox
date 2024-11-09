@@ -4,8 +4,9 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
+import { FormState } from "../common/constants";
 
-const CreateRoomView = ({ onCreateRoom, isRoomCreationSuccess }) => {
+const CreateRoomView = ({ onCreateRoom, formState }) => {
   const [newRoomName, setNewRoomName] = useState("");
   const [isShowError, setIsShowError] = useState(false);
 
@@ -15,13 +16,19 @@ const CreateRoomView = ({ onCreateRoom, isRoomCreationSuccess }) => {
   };
 
   useEffect(() => {
-    if (isRoomCreationSuccess) {
-      setNewRoomName("");
-      setIsShowError(false);
-    } else {
-      setIsShowError(true);
+    switch (formState) {
+      case FormState.Pending:
+        setIsShowError(false);
+        break;
+      case FormState.Success:
+        setNewRoomName("");
+        setIsShowError(false);
+        break;
+      case FormState.Failed:
+        setIsShowError(true);
+        break;
     }
-  }, [isRoomCreationSuccess]);
+  }, [formState]);
 
   return (
     <Box

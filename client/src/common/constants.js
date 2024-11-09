@@ -25,3 +25,8 @@ OutgoingMsg.SendMessage = "sendMessage";
 
 export const AppConsts = {};
 AppConsts.AppName = "WhisperHub";
+
+export const FormState = {};
+FormState.Pending = "pending";
+FormState.Success = "success";
+FormState.Failed = "failed";

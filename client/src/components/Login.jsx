@@ -6,14 +6,16 @@ import {
   AppConsts,
   OutgoingMsg,
   IncomingFormResponseMsg,
+  FormState,
 } from "../common/constants";
 
 const Login = () => {
-  const [isUserCreationSuccess, setIsUserCreationSuccess] = useState(true);
+  const [formState, setFormState] = useState(FormState.Success);
   const dispatch = useDispatch();
   const { identity } = useSelector((state) => state.userData);
 
   const setUsername = (identity) => {
+    setFormState(FormState.Pending);
     dispatch({
       type: OutgoingMsg.SetIdentity,
       payload: identity,
@@ -21,7 +23,7 @@ const Login = () => {
   };
 
   const formResponseListener = ({ success }) => {
-    setIsUserCreationSuccess(success);
+    setFormState(success ? FormState.Success : FormState.Failed);
   };
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const Login = () => {
       identity={identity}
       setIdentity={setUsername}
       appName={AppConsts.AppName}
-      isUserCreationSuccess={isUserCreationSuccess}
+      formState={formState}
     />
   );
 };
