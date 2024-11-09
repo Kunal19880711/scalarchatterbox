@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
-import { Drawer } from "@mui/material";
+import Drawer from "@mui/material/Drawer";
 
-const LoginView = ({ identity, setIdentity, appName }) => {
+const LoginView = ({
+  identity,
+  setIdentity,
+  appName,
+  isUserCreationSuccess,
+}) => {
   const [username, setUsername] = useState("");
+  const [isShowError, setIsShowError] = useState(false);
+
+  useEffect(() => {
+    if (isUserCreationSuccess) {
+      setUsername("");
+      setIsShowError(false);
+    } else {
+      setIsShowError(true);
+    }
+  }, [isUserCreationSuccess]);
 
   return (
     <Drawer anchor="top" open={!identity} transitionDuration={{ exit: 500 }}>
@@ -79,11 +94,22 @@ const LoginView = ({ identity, setIdentity, appName }) => {
             type="submit"
             color="primary"
             aria-label="send"
-            sx={{ m: 1 }}
+            sx={{ m: 1, ml: -1 }}
           >
             <SendIcon />
           </IconButton>
         </Box>
+
+        {isShowError && (
+          <Typography
+            component="p"
+            variant="subtitle2"
+            color="error"
+            sx={{ fontSize: "medium", pl: 2, pr: 2, backgroundColor: "white" }}
+          >
+            Name {username} already been taken! Use different name.
+          </Typography>
+        )}
       </Container>
     </Drawer>
   );
