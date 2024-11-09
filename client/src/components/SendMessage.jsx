@@ -1,7 +1,7 @@
 import React from "react";
 import SendMessageView from "./SendMessageView";
 import { useDispatch, useSelector } from "react-redux";
-import { OutgoingMsg } from "../common/contants";
+import { OutgoingMsg } from "../common/constants";
 
 const SendMessage = () => {
   const dispatch = useDispatch();

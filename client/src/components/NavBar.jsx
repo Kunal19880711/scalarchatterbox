@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import NavBarView from "./NavBarView";
-import { AppConsts } from "../common/contants";
+import { AppConsts } from "../common/constants";
 
 const NavBar = () => {
   const { focusedRoom, identity, joinedRooms } = useSelector(

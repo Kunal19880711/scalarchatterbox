@@ -4,7 +4,7 @@ import ChatPanel from "./ChatPanel";
 import NavBar from "./NavBar";
 import SendMessage from "./SendMessage";
 import Login from "./Login";
-import { IncomingMsg, SocketEvents } from "../common/contants";
+import { IncomingMsg, SocketEvents } from "../common/constants";
 
 function AppBody() {
   const dispatch = useDispatch();

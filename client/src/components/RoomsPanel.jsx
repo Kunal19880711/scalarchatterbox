@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RoomPanelView from "./RoomsPanelView";
-import { OutgoingMsg } from "../common/contants";
+import { OutgoingMsg } from "../common/constants";
 import { setFocusedRoom } from "../redux/userDataSlice";
 
 const RoomPanel = () => {

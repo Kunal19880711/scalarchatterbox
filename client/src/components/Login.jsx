@@ -6,7 +6,7 @@ import {
   AppConsts,
   OutgoingMsg,
   IncomingFormResponseMsg,
-} from "../common/contants";
+} from "../common/constants";
 
 const Login = () => {
   const [isUserCreationSuccess, setIsUserCreationSuccess] = useState(true);

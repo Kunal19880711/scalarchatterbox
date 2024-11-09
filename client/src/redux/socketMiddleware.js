@@ -16,7 +16,7 @@ import {
   addMessageToJoinedRoom,
   setFocusedRoom,
 } from "./userDataSlice";
-import { IncomingMsg, OutgoingMsg, SocketEvents } from "../common/contants";
+import { IncomingMsg, OutgoingMsg, SocketEvents } from "../common/constants";
 
 const socketMiddleware = (store) => (next) => (action) => {
   // Socket
