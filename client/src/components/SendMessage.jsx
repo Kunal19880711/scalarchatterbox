@@ -13,7 +13,9 @@ const SendMessage = () => {
       payload: { room: focusedRoom, message },
     });
   };
-  return <SendMessageView sendMessage={sendMessage} />;
+  return (
+    <SendMessageView sendMessage={sendMessage} focusedRoom={focusedRoom} />
+  );
 };
 
 export default SendMessage;

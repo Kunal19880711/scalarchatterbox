@@ -25,7 +25,6 @@ const CreateRoomView = ({ onCreateRoom }) => {
       }}
     >
       <TextField
-        id="room-name"
         name="room-name"
         label="Create Room"
         variant="standard"
